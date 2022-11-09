@@ -50,14 +50,6 @@ set(Aquila_Test_SOURCES
     transform/Spectrogram.cpp
 )
 
-if(SFML_FOUND)
-    list(APPEND Aquila_Test_SOURCES
-        synth/KarplusStrongSynthesizer.cpp
-        synth/SineSynthesizer.cpp
-        wrappers/SoundBufferAdapter.cpp
-    )
-endif()
-
 include_directories(${UNITTESTPP_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(aquila_test EXCLUDE_FROM_ALL ${Aquila_Test_SOURCES})
 target_link_libraries(aquila_test Aquila UnitTest++)

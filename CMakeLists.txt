@@ -30,18 +30,6 @@ set(Aquila_LIBRARIES_TO_LINK_WITH Ooura_fft)
 # additional CMake modules
 set(CMAKE_MODULE_PATH "${Aquila_SOURCE_DIR}/cmake")
 
-# SFML - if available
-#set(SFML_STATIC true)
-find_package(SFML COMPONENTS System Audio)
-if(SFML_FOUND)
-    message("SFML was found, wrappers and examples using SFML will be built.")
-    include_directories(${SFML_INCLUDE_DIR})
-    list(APPEND Aquila_LIBRARIES_TO_LINK_WITH ${SFML_LIBRARY})
-else()
-    message(WARNING "SFML was not found, wrappers and examples using SFML will not be built.")
-endif()
-
-
 ################################################################################
 #
 # Aquila sources
@@ -127,24 +115,6 @@ set(Aquila_SOURCES
     aquila/tools/TextPlot.cpp
 )
 
-# SFML wrappers
-if(SFML_FOUND)
-    list(APPEND Aquila_HEADERS
-        aquila/synth.h
-        aquila/wrappers/SoundBufferAdapter.h
-        aquila/synth/Synthesizer.h
-        aquila/synth/KarplusStrongSynthesizer.h
-        aquila/synth/SineSynthesizer.h
-    )
-    list(APPEND Aquila_SOURCES
-        aquila/wrappers/SoundBufferAdapter.cpp
-        aquila/synth/Synthesizer.cpp
-        aquila/synth/KarplusStrongSynthesizer.cpp
-        aquila/synth/SineSynthesizer.cpp
-    )
-endif()
-
-
 ################################################################################
 #
 # Compiler-specific workarounds
@@ -199,28 +169,6 @@ if(Aquila_BUILD_TESTS)
     set(UNITTESTPP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/unittestpp/")
     add_subdirectory(tests)
 endif()
-
-################################################################################
-#
-# Documentation
-#
-################################################################################
-
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-    configure_file(
-        "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
-        "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-        IMMEDIATE @ONLY
-    )
-    add_custom_target(docs
-        "${DOXYGEN_EXECUTABLE}"
-        "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-    )
-else()
-    message(WARNING "Doxygen not found, documentation will not be built")
-endif()
-
 
 ################################################################################
 #
