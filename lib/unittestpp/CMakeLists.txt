@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.1)
+cmake_minimum_required(VERSION 2.8.12)
 project(UnitTest++)
 
 option(UTPP_USE_PLUS_SIGN "Set this to OFF is you with to use '-cpp' instead of '++' in lib/include paths" ON)
