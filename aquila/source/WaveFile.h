@@ -170,6 +170,14 @@ namespace Aquila
 
         unsigned int getAudioLength() const;
 
+        /**
+         * Resizes the data array to the next power of 2 and fills up the remaining space
+         * with zeros.
+         *
+         * Does nothing if the size of the data array is already a power of 2.
+         */
+        void padToPowerOf2();
+
     private:
         /**
          * Full path of the .wav file.

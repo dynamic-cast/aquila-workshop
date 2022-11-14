@@ -95,6 +95,15 @@ SUITE(Functions)
         CHECK_EQUAL(1152921504606846976ul, Aquila::nextPowerOf2(576460752303423489ul));
     }
 
+    TEST(RoundToPowerOf2)
+    {
+        CHECK_EQUAL(2, Aquila::roundToPowerOf2(2));
+        CHECK_EQUAL(4, Aquila::roundToPowerOf2(3));
+        CHECK_EQUAL(1024, Aquila::roundToPowerOf2(513));
+        CHECK_EQUAL(16384, Aquila::roundToPowerOf2(16384));
+        CHECK_EQUAL(1152921504606846976ul, Aquila::roundToPowerOf2(576460752303423489ul));
+    }
+
     TEST(EuclideanDistanceToItself)
     {
         double distance = Aquila::euclideanDistance(v1, v1);

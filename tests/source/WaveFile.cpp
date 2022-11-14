@@ -237,4 +237,20 @@ SUITE(WaveFile)
             CHECK_EQUAL(testArray[i], wav.sample(i));
         }
     }
+
+    TEST(ZeroPaddingToNextPowerOf2)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_MONO);
+        const auto numSamples = wav.getSamplesCount();
+        CHECK_EQUAL(numSamples, 4552u);
+
+        const auto expectedSize = 8192u;
+        auto expectedData = std::vector<Aquila::SampleType>(expectedSize);
+        std::copy_n(wav.begin(), numSamples, expectedData.begin());
+
+        wav.padToPowerOf2();
+
+        CHECK_EQUAL(8192u, wav.getSamplesCount());
+        CHECK_ARRAY_EQUAL(expectedData.data(), wav.toArray(), expectedSize);
+    }
 }

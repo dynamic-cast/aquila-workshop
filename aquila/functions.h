@@ -129,6 +129,17 @@ namespace Aquila
         return (n + 1);
     }
 
+    template<typename Integer>
+    AQUILA_EXPORT inline Integer roundToPowerOf2(Integer n)
+    {
+        if (isPowerOf2(n))
+        {
+            return n;
+        }
+
+        return nextPowerOf2(n);
+    }
+
     /**
      * Prototype of distance calculating functions.
      */

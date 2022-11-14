@@ -15,6 +15,7 @@
  * @since 0.0.7
  */
 
+#include "../functions.h"
 #include "WaveFile.h"
 #include "WaveFileHandler.h"
 
@@ -89,5 +90,13 @@ namespace Aquila
     {
         return static_cast<unsigned int>(m_header.WaveSize /
                 static_cast<double>(m_header.BytesPerSec) * 1000);
+    }
+
+    void WaveFile::padToPowerOf2()
+    {
+        const auto newSize = roundToPowerOf2(getSamplesCount());
+
+        // Appends zeros by default
+        m_data.resize(newSize);
     }
 }
