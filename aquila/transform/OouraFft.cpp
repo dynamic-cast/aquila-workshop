@@ -15,10 +15,12 @@
  * @since 3.0.0
  */
 
+#include "../functions.h"
 #include "OouraFft.h"
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
+#include <stdexcept>
 
 namespace Aquila
 {
@@ -59,6 +61,13 @@ namespace Aquila
             sizeof(ComplexType[2]) == sizeof(double[4]),
             "complex<double> has the same memory layout as two consecutive doubles"
         );
+
+        // Required by the functions from Ooura's package
+        if (!isPowerOf2(N))
+        {
+            throw std::invalid_argument("Data size is expected to be a power 2");
+        }
+
         // create a temporary storage array and copy input to even elements
         // of the array (real values), leaving imaginary components at 0
         double* a = new double[2 * N];

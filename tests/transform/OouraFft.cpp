@@ -3,6 +3,8 @@
 #include "aquila/transform/OouraFft.h"
 #include "UnitTest++/UnitTest++.h"
 
+#include <stdexcept>
+
 
 SUITE(OouraFft)
 {
@@ -44,5 +46,14 @@ SUITE(OouraFft)
         identityTest<Aquila::OouraFft, 16>();
         identityTest<Aquila::OouraFft, 128>();
         identityTest<Aquila::OouraFft, 1024>();
+    }
+
+    TEST(ArgumentValidation)
+    {
+        const auto SIZE = 127;
+        const auto data = std::vector<Aquila::SampleType>(SIZE);
+
+        Aquila::OouraFft fft(SIZE);
+        CHECK_THROW(fft.fft(&data[0]), std::invalid_argument);
     }
 }
