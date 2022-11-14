@@ -39,3 +39,5 @@ add_subdirectory(fft_filter)
 add_subdirectory(spectrogram)
 add_subdirectory(mfcc_calculation)
 add_subdirectory(dtw_path_recovery)
+
+add_subdirectory(workshop)
